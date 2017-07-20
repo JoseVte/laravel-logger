@@ -30,4 +30,18 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     {
         $this->app->singleton('ChannelLog', 'Laravel\ChannelLog\Services\Writer');
     }
+
+    /**
+     * Register the package's component namespaces.
+     *
+     * @param  string  $package
+     * @param  string  $namespace
+     * @param  string  $path
+     * @return void
+     */
+    public function package($package, $namespace = null, $path = null)
+    {
+        // Copy the config file
+        $this->app['files']->copy('../../config/config.php', app_path('config').'/laravel-logger.php');
+    }
 }

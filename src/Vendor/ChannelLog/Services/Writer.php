@@ -3,7 +3,6 @@
 namespace Laravel\ChannelLog\Services;
 
 use Config;
-use Illuminate\Foundation\Application;
 use Monolog\Logger;
 use InvalidArgumentException;
 
@@ -34,12 +33,10 @@ class Writer
 
     /**
      * Writer constructor.
-     *
-     * @param \Illuminate\Foundation\Application $app
      */
-    public function __construct(Application $app)
+    public function __construct()
     {
-        $this->channels = Config::get('josrom/laravel-logger::channels');
+        $this->channels = Config::get('laravel-logger.channels');
     }
 
     /**
