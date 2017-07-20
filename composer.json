@@ -7,7 +7,6 @@
             "email": "jvortsromero@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
     "autoload": {
         "psr-0": {
             "Laravel\\ChannelLog\\": "src/"
