@@ -2,7 +2,9 @@
 
 namespace Laravel\ChannelLog;
 
-class Facade extends \Illuminate\Support\Facades\Facade
+use Illuminate\Support\Facades\Facade;
+
+class ChannelLog extends Facade
 {
     /**
      * Get the binding in the IoC container.

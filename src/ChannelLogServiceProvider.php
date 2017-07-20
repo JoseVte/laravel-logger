@@ -2,7 +2,9 @@
 
 namespace Laravel\ChannelLog;
 
-class ServiceProvider extends \Illuminate\Support\ServiceProvider
+use Illuminate\Support\ServiceProvider;
+
+class ChannelLogServiceProvider extends ServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.
@@ -13,8 +15,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
     /**
      * Bootstrap the application events.
-     *
-     * @return void
      */
     public function boot()
     {
@@ -23,8 +23,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register()
     {
@@ -34,17 +32,16 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     /**
      * Register the package's component namespaces.
      *
-     * @param  string  $package
-     * @param  string  $namespace
-     * @param  string  $path
-     * @return void
+     * @param string $package
+     * @param string $namespace
+     * @param string $path
      */
     public function package($package, $namespace = null, $path = null)
     {
         // Copy the config file
         $files = $this->app['files'];
-        if (!$files->exists(app_path('config').'/laravel-logger.php')) {
-            $files->copy(__DIR__ . '/config/config.php', app_path('config').'/laravel-logger.php');
+        if (!$files->exists(base_path('config/laravel-logger.php'))) {
+            $files->copy(__DIR__.'/Config/default.php', base_path('config/laravel-logger.php'));
         }
     }
 }

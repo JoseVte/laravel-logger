@@ -1,13 +1,20 @@
 {
     "name": "josrom/laravel-logger",
-    "description": "Custom logger to laravel",
+    "description": "ChannelLog: Custom logger to laravel",
     "authors": [
         {
             "name": "Jose Vicente",
             "email": "jvortsromero@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "support": {
+        "email": "jvortsromero@gmail.com"
+    },
+    "keywords": ["logging", "laravel"],
+    "license": "MIT",
+    "type": "library",
+    "version": "0.1.0",
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "Laravel\\ChannelLog\\": "src/"
@@ -15,6 +22,6 @@
     },
     "require": {
         "php": ">=5.5",
-        "laravel/framework": "4.2.*"
+        "laravel/framework": "5.*"
     }
 }
