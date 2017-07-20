@@ -1,0 +1,20 @@
+{
+    "name": "josrom/laravel-logger",
+    "description": "Custom logger to laravel",
+    "authors": [
+        {
+            "name": "Jose Vicente",
+            "email": "jvortsromero@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-0": {
+            "Laravel\\ChannelLog\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.5",
+        "laravel/framework": "4.2.*"
+    }
+}
