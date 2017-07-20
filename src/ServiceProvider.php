@@ -42,6 +42,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function package($package, $namespace = null, $path = null)
     {
         // Copy the config file
-        $this->app['files']->copy('../../config/config.php', app_path('config').'/laravel-logger.php');
+        $this->app['files']->copy('config/config.php', app_path('config').'/laravel-logger.php');
     }
 }
