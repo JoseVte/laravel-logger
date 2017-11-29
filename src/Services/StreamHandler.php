@@ -14,14 +14,16 @@ class StreamHandler extends \Monolog\Handler\StreamHandler
     protected $channel;
 
     /**
-     * @param string   $channel Channel name to write
+     * Construct.
+     *
+     * @param string   $channel        Channel name to write
      * @param bool|int $stream
      * @param bool|int $level
      * @param bool     $bubble
      * @param null     $filePermission
      * @param bool     $useLocking
      *
-     * @see parent __construct for params
+     * @throws \Exception
      */
     public function __construct($channel, $stream, $level = Logger::DEBUG, $bubble = true, $filePermission = null, $useLocking = false)
     {

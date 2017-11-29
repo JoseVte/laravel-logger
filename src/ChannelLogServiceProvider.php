@@ -18,7 +18,9 @@ class ChannelLogServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->package('josrom/laravel-logger');
+        $this->publishes([
+            __DIR__.'/Config/default.php' => config_path('laravel-logger.php')
+        ], 'config');
     }
 
     /**
@@ -27,21 +29,5 @@ class ChannelLogServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('ChannelLog', 'Laravel\ChannelLog\Services\Writer');
-    }
-
-    /**
-     * Register the package's component namespaces.
-     *
-     * @param string $package
-     * @param string $namespace
-     * @param string $path
-     */
-    public function package($package, $namespace = null, $path = null)
-    {
-        // Copy the config file
-        $files = $this->app['files'];
-        if (!$files->exists(base_path('config/laravel-logger.php'))) {
-            $files->copy(__DIR__.'/Config/default.php', base_path('config/laravel-logger.php'));
-        }
     }
 }

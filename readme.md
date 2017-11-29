@@ -27,3 +27,25 @@ Instead, you may of course manually update your require block and run composer u
     }
 }
 ```
+
+Add the service provider and alias to `config/app.php` file:
+
+```php
+'providers' => [
+    // Other Service Providers
+
+    Laravel\ChannelLog\ChannelLogServiceProvider::class,
+],
+
+'aliases' => [
+    // Other Alias
+    
+    'ChannelLog' => \Laravel\ChannelLog\ChannelLog::class,
+],
+```
+
+After to set up the provider, copy the default config file from the package using the `vendor:publish` artisan command:
+
+```bash
+php artisan vendor:publish --provider="Laravel\ChannelLog\ChannelLogServiceProvider"
+```
