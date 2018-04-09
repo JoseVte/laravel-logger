@@ -23,7 +23,7 @@ Instead, you may of course manually update your require block and run composer u
 ```json
 {
     "require": {
-        "josrom/laravel-logger": "^0.1"
+        "josrom/laravel-logger": "0.1.*"
     }
 }
 ```
@@ -49,3 +49,23 @@ After to set up the provider, copy the default config file from the package usin
 ```bash
 php artisan vendor:publish --provider="Laravel\ChannelLog\ChannelLogServiceProvider"
 ```
+
+### Usage
+
+Edit the config to add new logs, channels and extras:
+
+```php
+    'error' => [
+        'path' => 'logs/laravel-error.log',
+        'level' => \Monolog\Logger::ERROR,
+    ],
+    'info' => [
+        'path' => 'logs/laravel-info.log',
+        'level' => \Monolog\Logger::INFO,
+        'extras' => ['internet-provider'],
+    ],
+```
+
+#### Extras availables
+
+* Internet provider: `internet-provider`

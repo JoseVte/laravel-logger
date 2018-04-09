@@ -3,8 +3,13 @@
 namespace Laravel\ChannelLog\Services;
 
 use Config;
+use Exception;
 use Monolog\Logger;
 use InvalidArgumentException;
+use Monolog\Formatter\LineFormatter;
+use GuzzleHttp\Client as GuzzleClient;
+use Illuminate\Contracts\Support\Jsonable;
+use Illuminate\Contracts\Support\Arrayable;
 
 class Writer
 {
@@ -57,22 +62,42 @@ class Writer
         //lazy load logger
         if (!isset($this->channels[$channel]['_instance'])) {
             //create instance
-            $this->channels[$channel]['_instance'] = new Logger($channel);
-            //add custom handler
-            $this->channels[$channel]['_instance']->pushHandler(
-                new StreamHandler(
-                    $channel,
-                    storage_path().'/'.$this->channels[$channel]['path'],
-                    $this->channels[$channel]['level']
-                )
+            $logger = new Logger($channel);
+            $formatter = new LineFormatter();
+            $formatter->includeStacktraces(true);
+
+            $handler = new StreamHandler(
+                $channel,
+                storage_path().'/'.$this->channels[$channel]['path'],
+                $this->channels[$channel]['level']
             );
+            $handler->setFormatter($formatter);
+
+            //add custom handler
+            $this->channels[$channel]['_instance'] = $logger->pushHandler($handler);
         }
 
         //write out record
+        $message = $this->formatMessage($message);
         $this->channels[$channel]['_instance']->{$level}($message, $context);
+
+        // Extra log functions
+        if (array_has($this->channels, $channel.'.extras')) {
+            if (in_array('internet-provider', $this->channels[$channel]['extras'])) {
+                try {
+                    $client = new GuzzleClient();
+                    $response = $client->request('GET', 'https://ipinfo.io/'.request()->ip().'/org');
+                    $this->channels[$channel]['_instance']->{$level}('Internet provider: '.$response->getBody()->getContents(), $context);
+                } catch (Exception $exception) {
+                    $this->channels[$channel]['_instance']->{$level}('The internet provider cannot be found', $context);
+                }
+            }
+        }
     }
 
     /**
+     * Write in the log.
+     *
      * @param string $channel
      * @param mixed  $message
      * @param array  $context
@@ -101,5 +126,24 @@ class Writer
         if (in_array($func, array_keys($this->levels))) {
             $this->writeLog($params[0], $func, $params[1]);
         }
+    }
+
+    /**
+     * Format the parameters for the logger.
+     *
+     * @param  mixed  $message
+     * @return mixed
+     */
+    protected function formatMessage($message)
+    {
+        if (is_array($message)) {
+            return var_export($message, true);
+        } elseif ($message instanceof Jsonable) {
+            return $message->toJson();
+        } elseif ($message instanceof Arrayable) {
+            return var_export($message->toArray(), true);
+        }
+
+        return $message;
     }
 }

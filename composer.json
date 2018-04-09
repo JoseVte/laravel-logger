@@ -13,7 +13,7 @@
     "keywords": ["logging", "laravel"],
     "license": "MIT",
     "type": "library",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
@@ -22,6 +22,7 @@
     },
     "require": {
         "php": ">=5.5",
-        "laravel/framework": "5.*"
+        "laravel/framework": "5.*",
+        "guzzlehttp/guzzle": "~6.0"
     }
 }
