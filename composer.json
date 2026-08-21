@@ -13,7 +13,7 @@
     "keywords": ["logging", "laravel"],
     "license": "MIT",
     "type": "library",
-    "version": "8.0.0",
+    "version": "9.0.0",
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
@@ -21,9 +21,9 @@
         }
     },
     "require": {
-        "php": "^7.3|^8.0",
-        "laravel/framework": "8.*",
-        "guzzlehttp/guzzle": "~6.0"
+        "php": "^8.0",
+        "laravel/framework": "9.*",
+        "guzzlehttp/guzzle": "7.*"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.4"

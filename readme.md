@@ -1,4 +1,4 @@
-## Laravel 8.x ChannelLog
+## Laravel 9.x ChannelLog
 
 <p align="center">
 <a href="https://packagist.org/packages/josrom/laravel-logger"><img src="https://poser.pugx.org/josrom/laravel-logger/d/total.svg" alt="Total Downloads"></a>
@@ -23,7 +23,7 @@ Instead, you may of course manually update your require block and run composer u
 ```json
 {
     "require": {
-        "josrom/laravel-logger": "8.*"
+        "josrom/laravel-logger": "9.*"
     }
 }
 ```
@@ -74,7 +74,8 @@ Edit the config to add new logs, channels and extras:
 
 | Version              | Laravel              |
 |----------------------|----------------------|
-| <strong>8.*</strong> | <strong>8.*</strong> |
+| <strong>9.*</strong> | <strong>9.*</strong> |
+| 8.*                  | 8.*                  |
 | 7.*                  | 7.*                  |
 | 6.*                  | 6.*                  |
 | 0.1.* / 5.*          | 5.*                  |

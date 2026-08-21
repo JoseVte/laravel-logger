@@ -20,7 +20,7 @@ class Writer
      *
      * @var array
      */
-    protected $levels = [
+    protected array $levels = [
         'debug' => Logger::DEBUG,
         'info' => Logger::INFO,
         'notice' => Logger::NOTICE,
@@ -36,7 +36,7 @@ class Writer
      *
      * @var array
      */
-    private $channels;
+    private array $channels;
 
     /**
      * Writer constructor.
@@ -55,8 +55,9 @@ class Writer
      * @param array  $context
      *
      * @throws GuzzleException
+     * @throws Exception
      */
-    public function writeLog(string $channel, Logger $level, $message, array $context = []): void
+    public function writeLog(string $channel, Logger $level, mixed $message, array $context = []): void
     {
         //check channel exist
         if (!array_key_exists($channel, $this->channels)) {
@@ -106,7 +107,7 @@ class Writer
      *
      * @throws GuzzleException
      */
-    public function write(string $channel, $message, array $context = []): void
+    public function write(string $channel, mixed $message, array $context = []): void
     {
         //check channel exist
         if (!array_key_exists($channel, $this->channels)) {
@@ -122,12 +123,12 @@ class Writer
     /**
      * alert('event','Message');.
      *
-     * @param Logger $func
-     * @param array  $params
+     * @param mixed $func
+     * @param array $params
      *
      * @throws GuzzleException
      */
-    public function __call($func, array $params)
+    public function __call(mixed $func, array $params)
     {
         if (in_array($func, array_keys($this->levels))) {
             $this->writeLog($params[0], $func, $params[1]);
@@ -141,7 +142,7 @@ class Writer
      *
      * @return mixed
      */
-    protected function formatMessage($message)
+    protected function formatMessage(mixed $message): mixed
     {
         if (is_array($message)) {
             return var_export($message, true);

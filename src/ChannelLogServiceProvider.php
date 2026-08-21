@@ -3,6 +3,7 @@
 namespace Laravel\ChannelLog;
 
 use Illuminate\Support\ServiceProvider;
+use Laravel\ChannelLog\Services\Writer;
 
 class ChannelLogServiceProvider extends ServiceProvider
 {
@@ -16,7 +17,7 @@ class ChannelLogServiceProvider extends ServiceProvider
     /**
      * Bootstrap the application events.
      */
-    public function boot()
+    public function boot(): void
     {
         $this->publishes([
             __DIR__ . '/Config/default.php' => config_path('laravel-logger.php'),
@@ -28,6 +29,6 @@ class ChannelLogServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('ChannelLog', 'Laravel\ChannelLog\Services\Writer');
+        $this->app->singleton('ChannelLog', Writer::class);
     }
 }
