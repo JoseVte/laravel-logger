@@ -4,6 +4,7 @@ namespace Laravel\ChannelLog\Services;
 
 use Config;
 use Exception;
+use Monolog\Level;
 use Monolog\Logger;
 use Illuminate\Support\Arr;
 use InvalidArgumentException;
@@ -21,14 +22,14 @@ class Writer
      * @var array
      */
     protected array $levels = [
-        'debug' => Logger::DEBUG,
-        'info' => Logger::INFO,
-        'notice' => Logger::NOTICE,
-        'warning' => Logger::WARNING,
-        'error' => Logger::ERROR,
-        'critical' => Logger::CRITICAL,
-        'alert' => Logger::ALERT,
-        'emergency' => Logger::EMERGENCY,
+        'debug' => Level::Debug,
+        'info' => Level::Info,
+        'notice' => Level::Notice,
+        'warning' => Level::Warning,
+        'error' => Level::Error,
+        'critical' => Level::Critical,
+        'alert' => Level::Alert,
+        'emergency' => Level::Emergency,
     ];
 
     /**

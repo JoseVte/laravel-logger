@@ -5,7 +5,7 @@ return [
         /** Example */
         'event' => [
             'path' => 'logs/laravel-event.log',
-            'level' => \Monolog\Logger::INFO,
+            'level' => \Monolog\Level::Info,
         ],
     ],
 ];
