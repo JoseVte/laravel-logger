@@ -51,14 +51,14 @@ class Writer
      * Write to log based on the given channel and log level set.
      *
      * @param string $channel
-     * @param Logger $level
+     * @param string $level
      * @param mixed  $message
      * @param array  $context
      *
      * @throws GuzzleException
      * @throws Exception
      */
-    public function writeLog(string $channel, Logger $level, mixed $message, array $context = []): void
+    public function writeLog(string $channel, string $level, mixed $message, array $context = []): void
     {
         //check channel exist
         if (!array_key_exists($channel, $this->channels)) {
@@ -116,7 +116,7 @@ class Writer
         }
 
         //get method name for the associated level
-        $level = array_flip($this->levels)[$this->channels[$channel]['level']];
+        $level = array_search($this->channels[$channel]['level'], $this->levels, true);
         //write to log
         $this->writeLog($channel, $level, $message, $context);
     }

@@ -1,4 +1,4 @@
-## Laravel 11.x ChannelLog
+## Laravel 12.x ChannelLog
 
 <p align="center">
 <a href="https://packagist.org/packages/josrom/laravel-logger"><img src="https://poser.pugx.org/josrom/laravel-logger/d/total.svg" alt="Total Downloads"></a>
@@ -23,7 +23,7 @@ Instead, you may of course manually update your require block and run composer u
 ```json
 {
     "require": {
-        "josrom/laravel-logger": "11.*"
+        "josrom/laravel-logger": "12.*"
     }
 }
 ```
@@ -74,7 +74,8 @@ Edit the config to add new logs, channels and extras:
 
 | Version               | Laravel               |
 |-----------------------|-----------------------|
-| <strong>11.*</strong> | <strong>11.*</strong> |
+| <strong>12.*</strong> | <strong>12.*</strong> |
+| 11.*                  | 11.*                  |
 | 10.*                  | 10.*                  |
 | 9.*                   | 9.*                   |
 | 8.*                   | 8.*                   |

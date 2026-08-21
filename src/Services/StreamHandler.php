@@ -3,6 +3,7 @@
 namespace Laravel\ChannelLog\Services;
 
 use Monolog\Logger;
+use Monolog\LogRecord;
 
 class StreamHandler extends \Monolog\Handler\StreamHandler
 {
@@ -34,19 +35,9 @@ class StreamHandler extends \Monolog\Handler\StreamHandler
 
     /**
      * When to handle the log record.
-     *
-     * @param array $record
-     *
-     * @return bool
      */
-    public function isHandling(array $record): bool
+    public function isHandling(LogRecord $record): bool
     {
-        //Handle if Level high enough to be handled (default mechanism)
-        //AND CHANNELS MATCHING!
-        if (isset($record['channel'])) {
-            return $record['level'] >= $this->level && $record['channel'] == $this->channel;
-        }
-
-        return $record['level'] >= $this->level;
+        return $record->level->value >= $this->level->value && $record->channel === $this->channel;
     }
 }
