@@ -39,14 +39,14 @@ class StreamHandler extends \Monolog\Handler\StreamHandler
      *
      * @return bool
      */
-    public function isHandling(array $record)
+    public function isHandling(array $record): bool
     {
         //Handle if Level high enough to be handled (default mechanism)
         //AND CHANNELS MATCHING!
         if (isset($record['channel'])) {
             return $record['level'] >= $this->level && $record['channel'] == $this->channel;
-        } else {
-            return $record['level'] >= $this->level;
         }
+
+        return $record['level'] >= $this->level;
     }
 }

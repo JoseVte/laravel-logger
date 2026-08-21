@@ -19,7 +19,7 @@ class ChannelLogServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/Config/default.php' => config_path('laravel-logger.php')
+            __DIR__ . '/Config/default.php' => config_path('laravel-logger.php'),
         ], 'config');
     }
 
