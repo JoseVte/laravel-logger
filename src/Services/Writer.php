@@ -5,6 +5,7 @@ namespace Laravel\ChannelLog\Services;
 use Config;
 use Exception;
 use Monolog\Logger;
+use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use Monolog\Formatter\LineFormatter;
 use GuzzleHttp\Client as GuzzleClient;
@@ -55,10 +56,10 @@ class Writer
      *
      * @throws GuzzleException
      */
-    public function writeLog($channel, $level, $message, array $context = [])
+    public function writeLog(string $channel, Logger $level, $message, array $context = []): void
     {
         //check channel exist
-        if (!in_array($channel, array_keys($this->channels))) {
+        if (!array_key_exists($channel, $this->channels)) {
             throw new InvalidArgumentException('Invalid channel used.');
         }
 
@@ -85,7 +86,7 @@ class Writer
         $this->channels[$channel]['_instance']->{$level}($message, $context);
 
         // Extra log functions
-        if (array_has($this->channels, $channel . '.extras') && in_array('internet-provider', $this->channels[$channel]['extras'])) {
+        if (Arr::has($this->channels, $channel . '.extras') && in_array('internet-provider', $this->channels[$channel]['extras'], true)) {
             try {
                 $client = new GuzzleClient();
                 $response = $client->request('GET', 'https://ipinfo.io/' . request()->ip() . '/org');
@@ -105,10 +106,10 @@ class Writer
      *
      * @throws GuzzleException
      */
-    public function write($channel, $message, array $context = [])
+    public function write(string $channel, $message, array $context = []): void
     {
         //check channel exist
-        if (!in_array($channel, array_keys($this->channels))) {
+        if (!array_key_exists($channel, $this->channels)) {
             throw new InvalidArgumentException('Invalid channel used.');
         }
 
@@ -126,7 +127,7 @@ class Writer
      *
      * @throws GuzzleException
      */
-    public function __call($func, $params)
+    public function __call($func, array $params)
     {
         if (in_array($func, array_keys($this->levels))) {
             $this->writeLog($params[0], $func, $params[1]);
